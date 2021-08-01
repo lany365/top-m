@@ -2,7 +2,7 @@
   <div id="app">
 
     <router-view/>
-    <h1>uuuu</h1>
+    <h1>top-m</h1>
     <div><i class="top top-dianzan"></i></div>
     <van-button type="default">默认按钮</van-button>
     <van-button type="primary">主要按钮</van-button>
