@@ -79,8 +79,8 @@ export default {
   data () {
     return {
       user: {
-        mobile: '',
-        code: ''
+        mobile: ' ',
+        code: ' '
       },
       formRules: {
         mobile: [{
@@ -114,12 +114,15 @@ export default {
         duration: 0
       })
       try {
-        const res = await login(this.user)
-        console.log('登录成功', res)
-        this.$toast.success('OK')
+        const data = await login(this.user)
+        //console.log('登录成功', data)
+        this.$toast.success('登录成功')
+
+        //将后端返回的用户状态（token等数据）放到Vuex容器中
+        this.$store.commit('setUser',data.data)
       } catch (err) {
         console.log(err)
-        this.$toast.fail('XXX')
+        this.$toast.fail('登录失败')
         // if (err.response.status === 400) {
         //   console.log('登录失败', err)
         // }
