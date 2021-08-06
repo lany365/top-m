@@ -2,12 +2,14 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import './styles/index.less'
 import Vant from 'vant'
 import 'vant/lib/index.css'
 import 'amfe-flexible'
+import axios from 'axios'
+import './styles/index.less'
 
-Vue.use(Vant)
+
+Vue.use(Vant,axios)
 
 Vue.config.productionTip = false
 

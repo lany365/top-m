@@ -1,10 +1,7 @@
-import axios from 'axios'
+import axios from "axios"
 
-axios.create({
-  baseURL: 'http://ttapi.research.itcast.cn/'
+const request = axios.create({
+  baseURL: "http://ttapi.research.itcast.cn/" // 基础路径
 })
-
-
-
 
 export default request
