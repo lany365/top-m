@@ -114,12 +114,15 @@ export default {
         duration: 0
       })
       try {
-        const data = await login(this.user)
-        //console.log('登录成功', data)
+        const res = await login(this.user)
+        //console.log('登录成功', res)
         this.$toast.success('登录成功')
 
         //将后端返回的用户状态（token等数据）放到Vuex容器中
-        this.$store.commit('setUser',data.data)
+        this.$store.commit('setUser',res.data.data)
+
+        //登录成功，跳转回原来的页面
+        this.$router.back()
       } catch (err) {
         console.log(err)
         this.$toast.fail('登录失败')

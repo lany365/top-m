@@ -3,6 +3,11 @@
  */
 import request from "@/utils/request"
 
+//在非组件中获取store必须通过这种方式
+//这里单独加载store,和在组件中this.$store一样
+
+//import store from '@/store'
+
 /**
  * 用户登录
  */
@@ -24,3 +29,17 @@ export const sendSms = mobile => {
   })
 }
 
+
+/**
+ * 获取用户登录信息
+ */
+
+export const getUserInfo = () => {
+  return request({
+    method: 'GET',
+    url: '/app/v1_0/user'
+    // headers: {
+    //   Authorization: `Bearer ${store.state.user.token}`
+    // }
+  })
+}
