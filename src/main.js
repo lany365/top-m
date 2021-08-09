@@ -7,6 +7,7 @@ import 'vant/lib/index.css'
 import 'amfe-flexible'
 import axios from 'axios'
 import './styles/index.less'
+import './utils/dayjs'
 
 
 Vue.use(Vant,axios)

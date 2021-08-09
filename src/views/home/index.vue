@@ -12,12 +12,16 @@
       </van-button>
     </van-nav-bar>
     <!--导航栏-->
-    <van-tabs v-model="active">
+    <van-tabs class="channel-tabs" v-model="active">
       <van-tab
         :title="channel.name"
         v-for="channel in channels"
         :key="channel.id"
-      >{{channel.name}}的内容</van-tab>
+      >
+        <!--文章列表-->
+        <article-list :channel="channel"/>
+
+      </van-tab>
 
     </van-tabs>
   </div>
@@ -25,14 +29,17 @@
 
 <script>
   import { getUserChannels } from "@/api/user";
+  import ArticleList from './components/article-list'
 
   export default {
     name: "HomeIndex",
-    components: {},
+    components: {
+      ArticleList
+    },
     props: {},
     data () {
       return {
-        active: 2,
+        active: 0,
         channels: []
       }
     },
@@ -69,6 +76,18 @@
       }
       .van-button__text {
         font-size: 14px;
+      }
+    }
+    .channel-tabs {
+      /deep/ .van-tab {
+        border-right: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+      }
+      /deep/ .van-tabs__line {
+        bottom: 20px;
+        width: 25px !important;
+        height: 3px;
+        background: #3296fa;
       }
     }
   }
