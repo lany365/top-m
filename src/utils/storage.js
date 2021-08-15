@@ -25,6 +25,7 @@ export  const setItem = (name, value) => {
   window.locationbar.setItem(name, value)
 }
 
+
 export  const removeItem = name => {
   window.localStorage.removeItem(name)
 }
