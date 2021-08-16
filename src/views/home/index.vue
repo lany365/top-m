@@ -72,7 +72,7 @@
       return {
         active: 0,
         channels: [],
-        isChannelEditShow: true,
+        isChannelEditShow: false,
       }
     },
     computed: {
