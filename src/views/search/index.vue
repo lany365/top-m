@@ -4,7 +4,7 @@
       <van-search
         v-model="searchText"
         show-action
-        placeholder="请输入搜索关键词"
+        placeholder="搜索关键词"
         @search="onSearch(searchText)"
         @cancel="$router.back()"
         @focus="isResultShow = false"
