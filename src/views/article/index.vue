@@ -26,13 +26,18 @@
         :icon="article.is_followed ? '' : 'plus'"
         round
         size="small"
+        :loading="isFollowLoading"
+        @click="onFollow"
       >{{ article.is_followed ? '已关注' : '关注' }}
       </van-button>
     </van-cell>
 
     <!-- 文章内容 -->
-    <div class="article-content">
-      {{ article.content }}
+    <div
+      class="markdown-body"
+      v-html="article.content"
+      ref="article-content"
+    >
     </div>
     <van-divider>正文结束</van-divider>
 
@@ -42,7 +47,10 @@
 </template>
 
 <script>
+  import './github-markdown.css'
   import { getArticlesById } from '@/api/article'
+  import { ImagePreview } from 'vant'
+  import { addFollow, deleteFollow} from '@/api/user'
   //在组件中获取动态路由参数：
   //方式一：this.$route.params.xx
   //方式二:props传参
@@ -58,7 +66,8 @@
     },
     data () {
       return {
-        article: {}
+        article: {},//文章数据对象
+        isFollowLoading: false //关注用户按钮的loading状态
       }
     },
     computed: {},
@@ -72,6 +81,51 @@
         const { data } = await getArticlesById(this.articleId)
         // console.log(data)
         this.article = data.data
+        //数据改变影响视图更新（DOM数据）不是立即的
+        // 所以如果需要在修改数据之后马上操作被该数据影响的视图DOM，需要把这个代码放到$nextTick()
+        // 得到所有的img标签
+        // this.$nextTick()是vue提供的一种方法
+       this.$nextTick(()=> {
+         this.handlePerviewImage()
+         // const imgs = articleContent.querySelectorAll(img)
+         // console.log(imgs)
+       })
+      },
+
+      handlePerviewImage() {
+        // 1、从文章内容中获取到所有的 img DOM 节点
+        const articleContent = this.$refs['article-content']
+        // 2、获取文章内容中所有的图片地址
+        const imgs = articleContent.querySelectorAll('img')
+        const imgPaths = [] //搜集所有图片路径
+          // 3、遍历所有 img 节点，给每个节点注册点击事件
+        imgs.forEach((img, index) => {
+          imgPaths.push(img.src)
+          img.onclick = function () {
+            // 4、在 img 点击事件处理函数中，调用 ImagePreview 预览
+            ImagePreview({
+              images: imgPaths,
+              startPosition: index
+            })
+          }
+        })
+      },
+
+      async onFollow () {
+
+        this.isFollowLoading = true
+        if(this.article.is_followed){
+          //已关注，取消关注
+          await deleteFollow(this.article.aut_id)
+          //this.article.is_followed = false
+
+        } else {
+          //没有关注，添加关注
+          await addFollow(this.article.aut_id)
+          //this.article.is_followed = true
+        }
+        this.article.is_followed = !this.article.is_followed
+        this.isFollowLoading = false
       }
     }
   }
@@ -106,11 +160,9 @@
     }
   }
 
-  .article-content{
+  .markdown-body{
     padding: 14px;
-    /deep/ p {
-      text-align: justify;
-    }
+    background-color: #ffffff;
   }
 
 </style>
