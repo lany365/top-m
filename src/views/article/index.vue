@@ -9,27 +9,32 @@
     />
     <!--    导航栏-->
 
-    <h1 class="title">文章标题</h1>
+    <h1 class="title">{{ article.title }}</h1>
     <van-cell center class="user-info">
-      <div slot="title" class="name">melani</div>
+      <div slot="title" class="name">{{ article.aut_name }}</div>
       <van-image
         slot="icon"
         class="avatar"
         round
         fit="cover"
-        src="https://img01.yzcdn.cn/vant/cat.jpeg"
+        :src="article.aut_photo"
       />
-      <div slot="label" class="pubdate">1 hour</div>
+      <div slot="label" class="pubdate" >{{article.pubdate | relativeTime}}</div>
       <van-button
         class="follow-btn"
-        type="info"
-        icon="plus"
+        :type="article.is_followed ? 'default' : 'info'"
+        :icon="article.is_followed ? '' : 'plus'"
         round
         size="small"
-      >
-        关注
+      >{{ article.is_followed ? '已关注' : '关注' }}
       </van-button>
     </van-cell>
+
+    <!-- 文章内容 -->
+    <div class="article-content">
+      {{ article.content }}
+    </div>
+    <van-divider>正文结束</van-divider>
 
 
 
@@ -37,6 +42,7 @@
 </template>
 
 <script>
+  import { getArticlesById } from '@/api/article'
   //在组件中获取动态路由参数：
   //方式一：this.$route.params.xx
   //方式二:props传参
@@ -45,19 +51,29 @@
     name: "ArticleIndex",
     components: {},
     props: {
-      articleID: {
-        type: String,
+      articleId: {
+        type: [String, Number, Object],
         required: true
       }
     },
     data () {
-      return {}
+      return {
+        article: {}
+      }
     },
     computed: {},
     watch: {},
-    created () {},
+    created () {
+      this.loadArticle()
+    },
     mounted () {},
-    methods: {}
+    methods: {
+      async loadArticle () {
+        const { data } = await getArticlesById(this.articleId)
+        // console.log(data)
+        this.article = data.data
+      }
+    }
   }
 </script>
 
@@ -86,8 +102,14 @@
     .follow-btn{
       width: 85px;
       height: 30px;
-      background-color: #3296fa;
 
+    }
+  }
+
+  .article-content{
+    padding: 14px;
+    /deep/ p {
+      text-align: justify;
     }
   }
 
