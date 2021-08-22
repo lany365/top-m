@@ -10,6 +10,7 @@
         v-for="(comment, index) in list"
         :key="index"
         :comment="comment"
+        @reply-click="$emit('reply-click',$event)"
       />
 <!--      <van-cell-->
 <!--        v-for="(comment, index) in list"-->
@@ -33,11 +34,15 @@
       source: {
         type: [Number, String, Object],
         required: true
+      },
+      list: {
+        type: Array,
+        default: () => []
       }
     },
     data () {
       return {
-        list: [],
+        //list: [],
         loading: false,
         finished: false,
         offset: null,//获取下一页数据的页面
@@ -57,7 +62,10 @@
           offset: this.offset,//获取评论数据的偏移量，值为评论id，表示从此id的数据向后取，不传表示从第一页开始读取数据
           limit: this.limit//获取的评论数据个数，不传表示采用后端服务设定的默认每页数据量
         })
+
        // console.log(data)
+        this.$emit('update-total-count', data.data.total_count)
+
         //2，把数据放到列表中
         const { results } = data.data
         this.list.push(...results)

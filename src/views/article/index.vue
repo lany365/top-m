@@ -44,8 +44,13 @@
 
 
       <!-- 文章评论列表 -->
-      <CommentList :source="articleId" />
-      <!-- /文章评论列表 -->
+      <CommentList
+        :source="articleId"
+        :list="commentList"
+        @update-total-count="totalCommentCount = $event"
+        @reply-click="onReplyClick"
+      />
+      <!-- /文章评论列表 $event事件参数 -->
 
     </div>
 
@@ -60,10 +65,11 @@
         type="default"
         round
         size="small"
+        @click="isPostShow = true"
       >写评论</van-button>
       <van-icon
         name="comment-o"
-        info="123"
+        :info="totalCommentCount"
         color="#777"
       />
       <van-icon
@@ -80,8 +86,29 @@
     </div>
     <!-- /底部区域 -->
 
+    <!-- 评论弹出层 -->
+    <van-popup
+      v-model="isPostShow"
+      position="bottom"
+    >
 
+      <PostComment
+        :target="articleId"
+        @post-success="onPostSuccess"
+      />
+    </van-popup>
 
+    <!-- 评论弹出层 -->
+
+    <!-- 回复弹出层 -->
+    <van-popup
+      v-model="isReplyShow"
+      position="bottom"
+    >
+      <comment-reply />
+    </van-popup>
+
+    <!-- 回复弹出层 -->
 
 
   </div>
@@ -93,6 +120,8 @@
   import { ImagePreview } from 'vant'
   import { addFollow, deleteFollow} from '@/api/user'
   import CommentList from './components/comment-list'
+  import PostComment from './components/post-comment'
+  import CommentReply from './components/comment-reply'
 
 
   //在组件中获取动态路由参数：
@@ -102,7 +131,9 @@
   export default {
     name: "ArticleIndex",
     components: {
-      CommentList
+      CommentList,
+      PostComment,
+      CommentReply
     },
     props: {
       articleId: {
@@ -114,7 +145,11 @@
       return {
         article: {},//文章数据对象
         isFollowLoading: false,//关注用户按钮的loading状态
-        isCollectLoading: false //搜藏用户按钮的loading状态
+        isCollectLoading: false, //搜藏用户按钮的loading状态
+        isPostShow: false, //控制发布评论显示弹
+        commentList: [], //文章列表
+        totalCommentCount: 0,//评论总数量
+        isReplyShow: false
       }
     },
     computed: {},
@@ -205,6 +240,22 @@
           this.article.attitude = 1
         }
         this.$toast.success(`${this.article.attitude === 1 ? '' : '取消'}点赞成功`)
+      },
+
+      onPostSuccess (comment) {
+        console.log(comment)
+        //把发布成功的评论数据对象放到评论列表顶部
+        this.commentList.unshift(comment)
+        //更新评论的总数量
+        this.totalCommentCount++
+        //关闭发布评论弹出层
+        this.isPostShow = false
+      },
+
+      onReplyClick (comment) {
+        console.log('onReplyClick', comment)
+        //展示回复内容
+        this.isReplyShow = true
       }
 
 
