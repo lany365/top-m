@@ -105,7 +105,12 @@
       v-model="isReplyShow"
       position="bottom"
     >
-      <comment-reply />
+      <comment-reply
+        v-if="isReplyShow"
+        :comment="replyComment"
+        :article-id="articleId"
+        @close="isReplyShow = false"
+      />
     </van-popup>
 
     <!-- 回复弹出层 -->
@@ -149,7 +154,8 @@
         isPostShow: false, //控制发布评论显示弹
         commentList: [], //文章列表
         totalCommentCount: 0,//评论总数量
-        isReplyShow: false
+        isReplyShow: false,  //控制回复的显示状态
+        replyComment: {}  //当前回复评论对象
       }
     },
     computed: {},
@@ -253,7 +259,9 @@
       },
 
       onReplyClick (comment) {
-        console.log('onReplyClick', comment)
+        //console.log('onReplyClick', comment)
+
+        this.replyComment = comment
         //展示回复内容
         this.isReplyShow = true
       }
