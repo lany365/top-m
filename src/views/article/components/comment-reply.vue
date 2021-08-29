@@ -13,12 +13,13 @@
     <!----当前评论项----->
 
     <!----所有评论项----->
-    <van-cell title="所有回复"/>
+    <van-cell title="所有回复" />
     <comment-list
       :source="comment.com_id"
       type="c"
       :list="commentList"
-    />
+    ></comment-list>
+
     <!----所有评论项----->
 
     <!----底部区域----->
@@ -32,8 +33,6 @@
         >
         写评论
       </van-button>
-
-
     </div>
 
     <!----发布回复----->
