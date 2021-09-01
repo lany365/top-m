@@ -4,10 +4,9 @@
     <van-nav-bar
       class="app-nav-bar"
       title="搜藏历史记录"
-      left-arrow
-      @click-left="$router.back()"
     ></van-nav-bar>
-    <!-- /导航栏 -->
+    <!-- /导航栏 left-arrow
+      @click-left="$router.back()"-->
 
     <!-- 文章标签列表
             class="tabs-wrap"
