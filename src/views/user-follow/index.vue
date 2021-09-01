@@ -9,7 +9,7 @@
         class="tabs-wrap"
         v-model="active"
         slot="title"
-        background="#3296fa"
+        background="#ee0a24"
         color="#fff"
         title-inactive-color="#fff"
         title-active-color="#fff"

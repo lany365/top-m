@@ -82,7 +82,7 @@
         :name="article.attitude === 1 ? 'good-job' : 'good-job-o'"
         @click="onLike"
       />
-      <van-icon name="share" color="#777777"></van-icon>
+<!--      <van-icon name="share" color="#777777"></van-icon>-->
     </div>
     <!-- /底部区域 -->
 

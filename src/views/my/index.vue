@@ -259,8 +259,8 @@
 <style scoped lang="less">
   .my-container {
     .my-info {
-      /*background-color: #6db4fb;*/
-      background: url("~@/assets/banner.png") no-repeat;
+      background-color: #e22829;
+      /*background: url("~@/assets/banner.png") no-repeat;*/
       background-size: cover;
       .base-info {
         box-sizing: border-box;
@@ -310,8 +310,8 @@
 
     .not-login {
       height: 180px;
-      /*background-color: #6db4fb;*/
-      background: url("~@/assets/banner.png") no-repeat;
+      background-color: #e22829;
+      /*background: url("~@/assets/banner.png") no-repeat;*/
       background-size: cover;
       display: flex;
       flex-direction: column;

@@ -5,12 +5,16 @@
         v-model="searchText"
         show-action
         placeholder="搜索关键词"
+        background="#ee0a24"
         @search="onSearch(searchText)"
-        @cancel="$router.back()"
         @focus="isResultShow = false"
-      />
+      >
+        <template #action>
+          <div @click="onSearch(searchText)">搜索</div>
+        </template>
+      </van-search>
     </form>
-<!-- /搜索栏-->
+<!-- /搜索栏--><!--  show-action @cancel="$router.back()"-->
 
     <!-- 搜索结果-->
     <search-result

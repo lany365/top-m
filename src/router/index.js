@@ -9,11 +9,11 @@ const routes = [
     name: 'login',
     component: () => import('@/views/login/')
   },
-  {
-    path: '/search',
-    name: 'search',
-    component: () => import('@/views/search/')
-  },
+  // {
+  //   path: '/search',
+  //   name: 'search',
+  //   component: () => import('@/views/search/')
+  // },
   {
     path: '/user/profile',
     name: 'user-profile',
@@ -30,13 +30,13 @@ const routes = [
     props: true,
     meta: { requiresAuth: true }
   },
-  { // 我的作品、收藏、历史
-    name: 'my-article',
-    path: '/my-article/:type?',
-    component: () => import('@/views/my-article'),
-    props: true,
-    meta: { requiresAuth: true }
-  },
+  // { // 我的作品、收藏、历史
+  //   name: 'my-article',
+  //   path: '/my-article/:type?',
+  //   component: () => import('@/views/my-article'),
+  //   props: true,
+  //   meta: { requiresAuth: true }
+  // },
   {
     path: '/article/:articleId',
     name: 'article',
@@ -53,14 +53,16 @@ const routes = [
         component: () => import('@/views/home/')
       },
       {
-        path: '/qa',
-        name: 'qa',
-        component: () => import('@/views/qa/')
+        path: '/search',
+        name: 'search',
+        component: () => import('@/views/search/')
       },
-      {
-        path: '/video',
-        name: 'video',
-        component: () => import('@/views/video/')
+      { // 我的作品、收藏、历史
+        name: 'my-article',
+        path: '/my-article/:type?',
+        component: () => import('@/views/my-article'),
+        props: true,
+        meta: { requiresAuth: true }
       },
       {
         path: '/my',

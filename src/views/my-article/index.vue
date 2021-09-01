@@ -3,7 +3,7 @@
     <!-- 导航栏 -->
     <van-nav-bar
       class="app-nav-bar"
-      title="我的记录"
+      title="搜藏历史记录"
       left-arrow
       @click-left="$router.back()"
     ></van-nav-bar>
@@ -22,8 +22,8 @@
     <van-tabs
       class="fixed-tabs"
       v-model="active"
-      title-active-color="#3c9bfa"
-      color="#3c9bfa"
+      title-active-color="#ee0a24"
+      color="#ee0a24"
     >
       <van-tab :title="tab.title" v-for="tab in tabs" :key="tab.title">
         <loading-list :fn="tab.fn" v-slot="{ item }">

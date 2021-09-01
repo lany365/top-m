@@ -1,16 +1,19 @@
 <template>
   <div class="home-container">
     <!--导航栏-->
-    <van-nav-bar class="app-nav-bar">
-      <van-button
-        class="search-btn"
-        slot="title"
-        icon="search"
-        type="info"
-        to="/search"
-        round
-      >搜索
-      </van-button>
+    <van-nav-bar
+      class="app-nav-bar"
+      title="程序员的学习天地"
+    >
+<!--      <van-button-->
+<!--        class="search-btn"-->
+<!--        slot="title"-->
+<!--        icon="search"-->
+<!--        type="info"-->
+<!--        to="/search"-->
+<!--        round-->
+<!--      >搜索-->
+<!--      </van-button>-->
     </van-nav-bar>
     <!--导航栏-->
     <van-tabs class="channel-tabs" v-model="active">
@@ -139,7 +142,7 @@
     .search-btn {
       width: 277px;
       height: 32px;
-      background-color:#6db4fb;
+      background-color:#ff9d1d;
       boder:none;
       .van-icon {
         font-size: 16px;
@@ -157,7 +160,7 @@
         bottom: 20px;
         width: 25px !important;
         height: 3px;
-        background: #3296fa;
+        background: #e22829;
       }
     }
     .channel-edit-popup {
