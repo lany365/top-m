@@ -1,5 +1,7 @@
 <template>
-  <div class="home-container">其他</div>
+  <div class="home-container">
+    qq
+  </div>
 </template>
 
 <script>

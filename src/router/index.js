@@ -20,6 +20,24 @@ const routes = [
     component: () => import('@/views/user-profile/')
   },
   {
+    path: '/user/chat',
+    name: 'user-chat',
+    component: () => import('@/views/user-chat/')
+  },
+  { // 用户关注/粉丝
+    path: '/user/:userId/follow',
+    component: () => import('@/views/user-follow'),
+    props: true,
+    meta: { requiresAuth: true }
+  },
+  { // 我的作品、收藏、历史
+    name: 'my-article',
+    path: '/my-article/:type?',
+    component: () => import('@/views/my-article'),
+    props: true,
+    meta: { requiresAuth: true }
+  },
+  {
     path: '/article/:articleId',
     name: 'article',
     component: () => import('@/views/article/'),

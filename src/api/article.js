@@ -13,6 +13,8 @@ export const getArticles = (params) => {
   })
 }
 
+
+
 /****获取文章详情****/
 
 export const getArticlesById = articleId => {
@@ -66,4 +68,26 @@ export const deleteLike = articleId => {
   })
 }
 
+
+/**
+ * 获取当前用户收藏文章列表
+ */
+export function getUserCollectArticles (params) {
+  return request({
+    method: 'GET',
+    url: '/app/v1_0/article/collections',
+    params
+  })
+}
+
+/**
+ * 获取当前用户阅读历史文章列表
+ */
+export function getUserHistoryArticles (params) {
+  return request({
+    method: 'GET',
+    url: '/app/v1_0/user/histories',
+    params
+  })
+}
 

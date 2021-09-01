@@ -148,13 +148,13 @@
             <div class="text">头条</div>
           </div>
         </van-grid-item>
-        <van-grid-item class="data-info-item">
+        <van-grid-item class="data-info-item" :to="`/user/${user.id}/follow`">
           <div slot="text" class="text-wrap">
             <div class="count">{{userInfo.follow_count}}</div>
             <div class="text">关注</div>
           </div>
         </van-grid-item>
-        <van-grid-item class="data-info-item">
+        <van-grid-item class="data-info-item" :to="`/user/${user.id}/follow?tab=followers`">
           <div slot="text" class="text-wrap">
             <div class="count">{{userInfo.fans_count}}</div>
             <div class="text">粉丝</div>
@@ -176,23 +176,25 @@
       <div class="text">登录 / 注册</div>
     </div>
 
-    <van-grid class="nav-grid mb-4" :column-num="2">
+    <van-grid class="nav-grid mb-4" :column-num="2" clickable>
       <van-grid-item
         class="nav-grid-item"
         icon-prefix="top"
         icon="shoucang"
         text="收藏"
+        to="/my-article/collect"
       />
       <van-grid-item
         class="nav-grid-item"
         icon-prefix="top"
         icon="lishi"
         text="历史"
+        to="/my-article/history"
       />
     </van-grid>
 
     <van-cell title="消息通知" is-link to="/" />
-    <van-cell class="mb-4" title="小智同学" is-link to="/" />
+    <van-cell class="mb-4" title="小智同学" is-link to="/user/chat" />
     <van-cell
       v-if="user"
       class="logout-cell"
